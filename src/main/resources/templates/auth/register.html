@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet"/>
+</head>
+<body>
+
+<section class="pt-5 pb-5 mt-0 align-items-center d-flex bg-white"
+         style="min-height: 100vh; background-size: cover;">
+    <div class="container-fluid">
+        <div class="row justify-content-center align-items-center d-flex-row text-center h-100">
+            <div class="col-12 col-md-4 col-lg-3 h-50">
+                <div class="card shadow">
+                    <div class="card-body mx-auto">
+                        <h4 class="card-title mt-3 text-center">Sign Up</h4>
+                        <hr>
+
+                        <form action="#" th:action="@{/registerUser}" th:object="${user}" method="post">
+
+                            <div th:if="${success != null}" class="alert alert-success">
+                                <span th:text="${success}"></span>
+                            </div>
+
+                            <div th:if="${error != null} and !${#fields.hasErrors('*')}" class="alert alert-danger">
+                                <ul>
+                                    <li th:each="err : ${error}" th:text="${err}"></li>
+                                </ul>
+                            </div>
+
+                            <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                                <ul>
+                                    <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+                                </ul>
+                            </div>
+
+                            <div class="form-group input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                </div>
+                                <input name="userName" class="form-control" placeholder="User name" type="text"
+                                       th:field="*{userName}" required>
+                            </div>
+                            <div class="form-group input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                                </div>
+                                <input name="email" class="form-control" placeholder="E-Mail" type="text"
+                                       th:field="*{email}" required>
+                            </div>
+                            <div class="form-group input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                                </div>
+                                <input name="password" class="form-control" placeholder="8-16 Characters"
+                                       type="password" th:field="*{password}" required>
+                            </div>
+                            <div class="form-group input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                                </div>
+                                <input name="password_repeat" class="form-control" placeholder="8-16 Characters"
+                                       type="password" required>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-block" value="register">Register
+                                </button>
+                            </div>
+                            <p class="text-center">Already have an account?
+                                <a th:href="@{/login}">Log in</a>
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+
+</body>
+</html>

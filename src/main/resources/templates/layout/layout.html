@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title -->
+    <title th:text="${pageTitle}">Title</title>
+
+    <!-- Favicon -->
+    <link rel="icon" th:href="@{/img/core-img/favicon.ico}">
+
+    <!-- Style CSS -->
+    <link rel="stylesheet" th:href="@{/style.css}">
+
+</head>
+
+<body>
+<!-- Preloader -->
+<div id="preloader">
+    <div class="preload-content">
+        <div id="original-load"></div>
+    </div>
+</div>
+
+<!-- ##### Header Area Start ##### -->
+<header class="header-area">
+    <!-- Nav Area -->
+    <div class="original-nav-area" id="stickyNav">
+        <div class="classy-nav-container breakpoint-off">
+            <div class="container">
+                <!-- Classy Menu -->
+                <nav class="classy-navbar justify-content-between">
+                    <div class="col-12 col-sm-8">
+                        <div class="breaking-news-area">
+                            <div id="breakingNewsTicker" class="ticker">
+                                <ul>
+                                    <li sec:authorize="isAnonymous()"><a th:href="@{/}">Hello World!</a></li>
+                                    <li sec:authorize="isAnonymous()"><a th:href="@{/}">Hello Universe!</a></li>
+                                    <li sec:authorize="isAnonymous()"><a th:href="@{/}">Hello Original!</a></li>
+                                    <li sec:authorize="isAnonymous()"><a th:href="@{/}">Hello Earth!</a></li>
+                                    <li sec:authorize="isAuthenticated()"><a th:href="@{/profile}">Hello <span
+                                            sec:authentication="principal.username"></span>!</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Menu -->
+                    <div class="classy-menu" id="originalNav">
+                        <!-- Nav Start -->
+                        <div class="classynav">
+                            <ul>
+                                <li><a th:href="@{/}">Home</a></li>
+                                <li sec:authorize="isAnonymous()"><a th:href="@{/register}">Register</a></li>
+                                <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Login</a></li>
+                                <li sec:authorize="isAuthenticated() and hasRole('USER')"><a th:href="@{/profile}">Profile</a>
+                                </li>
+                                <li sec:authorize="isAuthenticated() and hasRole('ADMIN')"><a th:href="@{/admin-panel}">Admin
+                                    Panel</a></li>
+                                <li sec:authorize="isAuthenticated()">
+                                    <form action="#" th:action="@{/logout}" method="post">
+                                        <input class="btn subscribe-btn" type="submit" value="Logout">
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Nav End -->
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ##### Header Area End ##### -->
+
+<div layout:fragment="content">
+<!-- Content -->
+</div>
+<!-- ##### Footer Area Start ##### -->
+<footer class="footer-area text-center">
+
+    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+    Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+    All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a
+        href="https://colorlib.com" target="_blank">Colorlib</a>
+    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+
+</footer>
+<!-- ##### Footer Area End ##### -->
+
+<!-- jQuery (Necessary for All JavaScript Plugins) -->
+<script th:src="@{/js/jquery/jquery-2.2.4.min.js}"></script>
+<!-- Popper js -->
+<script th:src="@{/js/popper.min.js}"></script>
+<!-- Bootstrap js -->
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<!-- Plugins js -->
+<script th:src="@{/js/plugins.js}"></script>
+<!-- Active js -->
+<script th:src="@{/js/active.js}"></script>
+
+</body>
+
+</html>

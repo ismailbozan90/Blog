@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layout/layout}">
+
+<head>
+    <title th:text="${pageTitle}">Title</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="single-blog-wrapper section-padding-0-100">
+        <!-- Single Blog Area  -->
+        <div class="single-blog-area blog-style-2 mb-50">
+            <div class="single-blog-thumbnail">
+                <img src="img/bg-img/b5.jpg" th:if="${post.thumbnail != null}"
+                     th:src="'data:image/jpeg;base64,' + ${#vars['base64Thumbnail']}" alt=""
+                     style="height: auto; position: absolute; top: 0;">
+                <div class="post-tag-content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="post-date">
+                                    <a href="#" th:text="${post.date.day}">12</a><a href="#"><span
+                                        th:text="${#dates.format(post.date, 'MMMM')}">month</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <!-- ##### Post Content Area ##### -->
+                <div class="col-12 col-lg-9">
+                    <!-- Single Blog Area  -->
+                    <div class="single-blog-area blog-style-2 mb-50">
+                        <!-- Blog Content -->
+                        <div class="single-blog-content">
+                            <h4><a href="#" class="post-headline mb-0" th:text="${post.title}">Title</a></h4>
+                            <hr>
+                            <div class="post-meta mb-50">
+                                <p>By <a th:text="${post.owner.userName}" href="#">author</a></p>
+                                <p th:text="${post.comments != null ? post.comments.size() : 0} + ' comments'">0
+                                    comments</p>
+                            </div>
+                            <p th:text="${post.content}">Content</p>
+
+                        </div>
+                    </div>
+
+                    <!-- Comment Area Start -->
+                    <div class="comment_area clearfix mt-70">
+                        <h5 class="title">Comments</h5>
+
+                        <div th:if="${#lists.isEmpty(post.comments)}">
+                            <p>No comments at the moment.</p>
+                        </div>
+
+                        <div th:if="${!#lists.isEmpty(post.comments)}">
+
+                            <ol th:each="comment : ${comments}">
+                                <!-- Single Comment Area -->
+                                <li class="single_comment_area">
+                                    <!-- Comment Content -->
+                                    <div class="comment-content d-flex">
+                                        <!-- Comment Meta -->
+                                        <div class="comment-meta">
+                                            <a href="#" class="post-date"
+                                               th:text="${comment.date.day + ' ' +  #dates.format(comment.date, 'MMMM')}">Date</a>
+
+                                            <p><a href="#" class="post-author" th:text="${comment.owner.userName}">Comment
+                                                owner</a></p>
+                                            <p th:text="${comment.comment}">Comment</p>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="post-a-comment-area mt-70">
+                        <h5>Leave a reply</h5>
+                        <!-- Reply Form -->
+                        <form action="#" th:action="@{/comment/sendComment}" method="post">
+                            <div th:if="${success != null}" class="alert alert-success">
+                                <span th:text="${success}"></span>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="group">
+                                        <input type="hidden" name="post-id" th:value="${post.id}">
+                                        <textarea name="message" required></textarea>
+                                        <span class="highlight"></span>
+                                        <span class="bar"></span>
+                                        <label>Comment</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn original-btn">Reply</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

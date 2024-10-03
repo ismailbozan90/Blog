@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layout/layout}">
+
+<head>
+    <title th:text="${pageTitle}">Title</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <!-- ##### Blog Wrapper Start ##### -->
+    <div class="blog-wrapper section-padding-25 clearfix">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-9">
+
+                    <div th:if="${#lists.isEmpty(posts)}">
+                        <p>No posts available at the moment. Please check back later!</p>
+                    </div>
+
+                    <div th:if="${!#lists.isEmpty(posts)}">
+
+                        <!-- Single Blog Area  -->
+                        <div class="single-blog-area blog-style-2 mb-50 wow fadeInUp" data-wow-delay="0.2s"
+                             data-wow-duration="1000ms" th:each="post: ${posts}">
+                            <div class="row align-items-center">
+                                <div class="col-12 col-md-6">
+                                    <div class="single-blog-thumbnail">
+                                        <img src="img/blog-img/3.jpg" th:if="${post.thumbnail != null}"
+                                             th:src="'data:image/jpeg;base64,' + ${#vars['base64Thumbnail_' + post.id]}"/>
+                                        <div class="post-date">
+                                            <a href="#" th:text="${post.date.day}">12</a><a href="#"><span
+                                                th:text="${#dates.format(post.date, 'MMMM')}">month</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <!-- Blog Content -->
+                                    <div class="single-blog-content">
+                                        <a th:href="@{/post/{id}(id=${post.id})}"
+                                           class="post-headline"><h4 th:text="${post.title}">Title</h4></a>
+                                        <p th:text="${post.description}">Description</p>
+                                        <div class="post-meta">
+                                            <p>By <a href="#" th:text="${post.owner.userName}">Author</a></p>
+                                            <p th:text="${post.comments != null ? post.comments.size() : 0} + ' comments'">
+                                                3
+                                                comments</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Load More -->
+                    <div class="load-more-btn mt-100 wow fadeInUp" data-wow-delay="0.7s" data-wow-duration="1000ms">
+                        <a href="#" class="btn original-btn">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Blog Wrapper End ##### -->
+</div>
+</body>
+</html>

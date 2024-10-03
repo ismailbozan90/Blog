@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://code.jquery.com/jquery-3.3.1.slim.min.js" rel="stylesheet"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet"/>
+</head>
+<body>
+
+<section class="pt-5 pb-5 mt-0 align-items-center d-flex bg-white"
+         style="min-height: 100vh; background-size: cover;">
+    <div class="container-fluid">
+        <div class="row  justify-content-center align-items-center d-flex-row text-center h-100">
+            <div class="col-12 col-md-4 col-lg-3   h-50 ">
+                <div class="card shadow">
+                    <div class="card-body mx-auto">
+                        <h4 class="card-title mt-3 text-center">Login</h4>
+                        <hr>
+                        <div th:if="${param.error}">
+                            <div class="alert alert-danger" role="alert">
+                                Username or password wrong!
+                            </div>
+                        </div>
+
+                        <div th:if="${param.logout}">
+                            <div class="alert alert-success" role="alert">
+                                You successfully logout!
+                            </div>
+                        </div>
+
+                        <form action="#" th:action="@{authenticateTheUser}" method="post">
+                            <div class="form-group input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                                </div>
+                                <input class="form-control" name="username" type="text">
+                            </div>
+                            <div class="form-group input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                                </div>
+                                <input class="form-control" name="password" type="password">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-block" value="login"> Login</button>
+                            </div>
+                            <p class="text-center">Haven't an account?
+                                <a th:href="@{/register}">Sign Up</a>
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
