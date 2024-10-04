@@ -21,4 +21,8 @@ public class CommentService {
         commentRepository.save(comment);
     }
 
+    public Long getUserCommentCount(Long userId) {
+        return commentRepository.countByOwner_Id(userId);
+    }
+
 }

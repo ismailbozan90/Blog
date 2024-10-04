@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Base64;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -47,5 +48,14 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles = new HashSet<>();
+
+
+    @Column(name="profile_picture")
+    private String profilePicture;
+
+
+    @Column(name="profile_background")
+    private String profileBackground;
+
 
 }

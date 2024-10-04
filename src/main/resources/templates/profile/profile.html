@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layout/layout}">
+
+<head>
+    <title th:text="${pageTitle}">Title</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="single-blog-wrapper">
+        <div class="single-blog-area blog-style-2 mb-50">
+            <div class="single-blog-thumbnail">
+                <img th:src="${user.profileBackground != null ? user.profileBackground : '/img/bg-img/b5.jpg'}"
+                     alt=""
+                     style="height: auto; position: absolute; top: 0;">
+            </div>
+        </div>
+        <div class="container">
+            <h4 th:text="${user.userName}">Username</h4>
+            <!-- About Author -->
+            <div class="blog-post-author d-flex">
+                <div class="author-thumbnail">
+                    <img th:src="${user.profilePicture != null ? user.profilePicture : '/img/bg-img/b6.jpg'}" alt="">
+                </div>
+                <div class="author-info">
+                    <div class="line"></div>
+                    <p th:text="'E-Mail : ' + ${user.getEmail()}">E-mail : </p>
+                    <span class="author-role"></span>
+                    <div class="line"></div>
+                    <span class="author-role"></span>
+                    <p th:text="'Posts : '+${postCount}">Posts : </p>
+                    <p th:text="'Comments : '+${commentCount}">Comments : </p>
+                    <span class="author-role"></span>
+                    <div class="line"></div>
+
+                    <div class="sidebar-widget-area">
+                        <div class="widget-content">
+                            <ul class="tags">
+                                <li><a href="#" th:href="@{/post/create-post}">Create Post</a></li>
+                                <li><a href="#" th:href="@{/profile/edit-profile}">Edit Profile</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

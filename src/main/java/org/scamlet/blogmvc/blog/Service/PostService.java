@@ -32,4 +32,8 @@ public class PostService {
         return postRepository.findById(id);
     }
 
+    public Long countUserPosts(Long userId) {
+        return postRepository.countByOwnerId(userId);
+    }
+
 }

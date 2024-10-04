@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -49,6 +50,22 @@ public class UserService {
     public boolean checkUserEmail(String email) {
         User user = userRepository.findByEmail(email);
         return user != null;
+    }
+
+    public Optional<User> getUserById(Long id) {
+        return userRepository.findById(id);
+    }
+
+    @Transactional
+    public void changeUserPassword(User user, String password) {
+        String hashedPassword = bCryptPasswordEncoder.encode(password);
+        user.setPassword(hashedPassword);
+        userRepository.save(user);
+    }
+
+    @Transactional
+    public void updateUser(User user) {
+        userRepository.save(user);
     }
 
 }

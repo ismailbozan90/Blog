@@ -43,7 +43,7 @@
                                     <li sec:authorize="isAnonymous()"><a th:href="@{/}">Hello Universe!</a></li>
                                     <li sec:authorize="isAnonymous()"><a th:href="@{/}">Hello Original!</a></li>
                                     <li sec:authorize="isAnonymous()"><a th:href="@{/}">Hello Earth!</a></li>
-                                    <li sec:authorize="isAuthenticated()"><a th:href="@{/profile}">Hello <span
+                                    <li sec:authorize="isAuthenticated()"><a th:href="@{/}">Hello <span
                                             sec:authentication="principal.username"></span>!</a></li>
                                 </ul>
                             </div>

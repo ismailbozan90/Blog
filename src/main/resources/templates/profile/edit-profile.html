@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layout/layout}">
+
+<head>
+    <title th:text="${pageTitle}">Title</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="single-blog-wrapper">
+        <div class="single-blog-area blog-style-2 mb-50">
+            <div class="single-blog-thumbnail">
+                <img th:src="${user.profileBackground != null ? user.profileBackground : '/img/bg-img/b5.jpg'}"
+                     alt=""
+                     style="height: auto; position: absolute; top: 0;">
+            </div>
+        </div>
+        <div class="container">
+            <div class="col-12 col-md-10 col-lg-9">
+                <div class="contact-form">
+                    <h5>Change Password</h5>
+                    <hr>
+                    <form action="#" th:action="@{/profile/changePassword}" method="post" enctype="multipart/form-data">
+
+                        <div th:if="${passwordSuccess != null}" class="alert alert-success">
+                            <span th:text="${passwordSuccess}"></span>
+                        </div>
+
+                        <div th:if="${passwordError != null}" class="alert alert-danger">
+                            <ul>
+                                <li th:each="err : ${passwordError}" th:text="${err}"></li>
+                            </ul>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="group">
+                                    <input type="hidden" name="user_id" th:value="${user.id}">
+                                    <input type="password" name="password" required>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label>Password</label>
+                                </div>
+                                <div class="group">
+                                    <input type="password" name="password_repeat" required>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label>Password Repeat</label>
+                                </div>
+                            </div>
+                            <div class="col-12" style="padding-bottom: 50px;">
+                                <button type="submit" class="btn original-btn">Change Password</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <h5>Change Profile/Background Picture</h5>
+            <div class="blog-post-author d-flex">
+
+                <div class="author-thumbnail">
+                    <img th:src="${user.profilePicture != null ? user.profilePicture : '/img/bg-img/b6.jpg'}" alt="">
+                </div>
+                <div class="author-info">
+                    <form action="#" th:action="@{/profile/changeProfilePicture}" method="post" enctype="multipart/form-data">
+
+                        <div th:if="${profilePictureSuccess != null}" class="alert alert-success">
+                            <span th:text="${profilePictureSuccess}"></span>
+                        </div>
+
+                        <div th:if="${profilePictureError != null}" class="alert alert-danger">
+                            <ul>
+                                <li th:each="err : ${profilePictureError}" th:text="${err}"></li>
+                            </ul>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="group">
+                                    <input type="hidden" name="user_id" th:value="${user.id}">
+                                    <input type="file" name="profile-picture" accept="image/*" required>
+                                </div>
+                            </div>
+                            <div class="col-12" style="padding-bottom: 50px;">
+                                <button type="submit" class="btn original-btn">Change Profile Picture</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="author-info">
+                    <form action="#" th:action="@{/profile/changeBackgroundPicture}" method="post" enctype="multipart/form-data">
+
+                        <div th:if="${backgroundPictureSuccess != null}" class="alert alert-success">
+                            <span th:text="${backgroundPictureSuccess}"></span>
+                        </div>
+
+                        <div th:if="${backgroundPictureError != null}" class="alert alert-danger">
+                            <ul>
+                                <li th:each="err : ${backgroundPictureError}" th:text="${err}"></li>
+                            </ul>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="group">
+                                    <input type="hidden" name="user_id" th:value="${user.id}">
+                                    <input type="file" name="background-picture" accept="image/*" required>
+                                </div>
+                            </div>
+                            <div class="col-12" style="padding-bottom: 50px;">
+                                <button type="submit" class="btn original-btn">Change Background Picture</button>
+                            </div>
+                        </div>
+                    </form>
+
+
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
