@@ -49,7 +49,23 @@
                                 </div>
                             </div>
                         </div>
+
+
+                        <div>
+                            <nav aria-label="...">
+                                <ul class="pagination pagination-sm justify-content-center">
+                                    <li th:each="i : ${#numbers.sequence(0, posts.totalPages - 1)}"
+                                        th:class="${i == posts.number} ? 'page-item active' : 'page-item'">
+                                        <a class="page-link" th:href="@{/products(page=${i}, size=${posts.size})}"
+                                           th:text="${i + 1}"></a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+
                     </div>
+
+
 
                     <!-- Load More -->
                     <div class="load-more-btn mt-100 wow fadeInUp" data-wow-delay="0.7s" data-wow-duration="1000ms">

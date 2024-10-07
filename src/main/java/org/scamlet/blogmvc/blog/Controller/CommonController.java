@@ -3,9 +3,11 @@ package org.scamlet.blogmvc.blog.Controller;
 import org.scamlet.blogmvc.blog.Entity.Post;
 import org.scamlet.blogmvc.blog.Service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -20,8 +22,9 @@ public class CommonController {
     }
 
     @GetMapping("/")
-    public String index(Model model) {
-        List<Post> posts = postService.getPosts();
+    public String index(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
+        //List<Post> posts = postService.getPosts();
+        Page<Post> posts = postService.findPage(page, size);
         for (Post post : posts) {
             if (post.getThumbnail() != null) {
                 String base64Thumbnail = post.getBase64Thumbnail();
