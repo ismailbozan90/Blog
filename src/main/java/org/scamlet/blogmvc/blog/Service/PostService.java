@@ -44,4 +44,9 @@ public class PostService {
         return postRepository.findAll(pageable);
     }
 
+    public Page<Post> search(int page, int size, String param) {
+        Pageable pageable = PageRequest.of(page, size);
+        return postRepository.searchByName(param, pageable);
+    }
+
 }

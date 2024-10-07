@@ -8,6 +8,7 @@ import org.scamlet.blogmvc.blog.Service.PostService;
 import org.scamlet.blogmvc.blog.Service.UserService;
 import org.scamlet.blogmvc.blog.Utility.CurrentSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -101,6 +102,20 @@ public class PostController {
         model.addAttribute("post", new Post());
         redirectAttributes.addFlashAttribute("success", "Post created successfully.");
         return "redirect:/post/create-post";
+    }
+
+    @PostMapping("/search")
+    public String search(@RequestParam("search") String search, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "1") int size, Model model) {
+        Page<Post> posts = postService.search(page, size, search);
+        for (Post post : posts) {
+            if (post.getThumbnail() != null) {
+                String base64Thumbnail = post.getBase64Thumbnail();
+                model.addAttribute("base64Thumbnail_" + post.getId(), base64Thumbnail);
+            }
+        }
+        model.addAttribute("posts", posts);
+        model.addAttribute("pageTitle", "Home Page");
+        return "/post/search";
     }
 
 
